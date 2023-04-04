@@ -16,10 +16,10 @@ jobs:
       - run:
          name: run mvn
          command: |
-            mvn clean deploy
+            mvn clean install
 
 
       # run tests
       - run:
          name: run tests
-         command: ./sync-endpoint-docker-test/init.sh
+         command: bash ./sync-endpoint-docker-test/init.sh
