@@ -7,17 +7,14 @@ jobs:
 
     docker:
       # choose the right version, which include the maven, otherwise the mvn deploy will fail
-      - image: cimg/android:2023.02
+      - image: cimg/maven:3.8.3-jdk-8
 
     steps:
       - checkout
 
       #run mvn
-      - run:
-         name: run mvn
-         command: |
-            mvn clean install
-
+      - run: mvn clean install -DskipTests=true
+      - run: mvn verify
 
       # run tests
       - run:
