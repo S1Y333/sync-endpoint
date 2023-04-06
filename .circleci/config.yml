@@ -5,10 +5,11 @@ version: 2.1
 jobs:
   build:
 
-    docker:
+    #docker:
       # choose the right version, which include the maven, otherwise the mvn deploy will fail
-      - image: cimg/openjdk:19.0.2
-
+      #- image: cimg/openjdk:19.0.2
+    machine:
+      image: ubuntu-2204:2022.04.2
     steps:
       - checkout
       - run:
