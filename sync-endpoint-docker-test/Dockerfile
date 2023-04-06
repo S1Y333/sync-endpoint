@@ -1,5 +1,7 @@
 FROM tomcat:8.5
 
+WORKDIR /sync-endpoint-docker-test
+
 COPY init.sh /tmp/init.sh
 COPY resources/server.xml conf/
 COPY resources/logging.properties conf/
