@@ -11,10 +11,16 @@ jobs:
 
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.9
       #get docker host info
-      - run: docker info
+      - run: 
+          name: check docker image
+          command: docker info
       #run mvn
-      - run: mvn clean install 
+      - run: 
+         name: mvn install
+         command: mvn clean install 
   
   docker_test:
       docker:
