@@ -667,7 +667,34 @@
                     <artifactId>flatten-maven-plugin</artifactId>
                     <version>${flatten-maven-plugin.version}</version>
                 </plugin>
-            </plugins>
+           
+          
+    			<plugin>
+     				 <groupId>io.fabric8</groupId>
+      				 <artifactId>docker-maven-plugin</artifactId>
+     				 <<version>0.34.1</version>>
+     				 <executions>
+       					 <execution>
+         					 <id>start-container</id>
+       						 <phase>pre-integration-test</phase>
+          					 <goals>
+           						<goal>start</goal>
+          					 </goals>
+         				   <configuration>
+           					 <image>my-image</image>
+           					 <!-- Other configuration properties here -->
+         				   </configuration>
+       					 </execution>
+       					 <execution>
+         					 <id>stop-container</id>
+         					 <phase>post-integration-test</phase>
+         				 <goals>
+           					 <goal>stop</goal>
+          				 </goals>
+       					 </execution>
+      				 </executions>
+   				 </plugin>
+ 			 </plugins> 
         </pluginManagement>
     </build>
 </project>

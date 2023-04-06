@@ -7,16 +7,28 @@ jobs:
 
     docker:
       # choose the right version, which include the maven, otherwise the mvn deploy will fail
-      - image: cimg/maven:3.8.3-jdk-8
+      - image: cimg/maven@1.4.1
 
     steps:
       - checkout
 
       #run mvn
-      - run: mvn clean install -DskipTests=true
-      - run: mvn verify
+      - run: mvn clean install 
+  
+  docker_test:
+      docker:
+        - image: cimg/openjdk:19.0.2
+      steps:
+        - checkout
+        - run:
+           name: run docker tests
+           command: bash ./sync-endpoint-docker-test/init.sh
 
-      # run tests
-      - run:
-         name: run tests
-         command: bash ./sync-endpoint-docker-test/init.sh
+workflows: 
+  build_and_deploy:
+    jobs:
+      - build
+      - docker_test:
+          requires:
+            - build
+     
