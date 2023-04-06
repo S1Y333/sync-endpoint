@@ -14,12 +14,12 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            docker build -t S1Y333/docker_testimage:${CIRCLE_SHA1} -f ./sync-endpoint-docker-test/Dockerfile .
+            docker build -t s1y333/docker_testimage:${CIRCLE_SHA1} -f ./sync-endpoint-docker-test/Dockerfile .
       - run:
           name: Push Docker image
           command: |
             echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-            docker push S1Y333/docker_testimage:${CIRCLE_SHA1}
+            docker push s1y333/docker_testimage:${CIRCLE_SHA1}
       #run mvn
       - run: 
          name: mvn install
