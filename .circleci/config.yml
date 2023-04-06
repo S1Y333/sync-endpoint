@@ -11,7 +11,8 @@ jobs:
 
     steps:
       - checkout
-
+      #get docker host info
+      - run: docker info
       #run mvn
       - run: mvn clean install 
   
