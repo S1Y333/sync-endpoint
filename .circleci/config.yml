@@ -11,12 +11,15 @@ jobs:
 
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.9
-      #get docker host info
-      - run: 
-          name: check docker image
-          command: docker info
+      - run:
+          name: Build Docker image
+          command: |
+            docker build -t S1Y333/docker_testimage:${CIRCLE_SHA1} -f ./sync-endpoint-docker-test/Dockerfile .
+      - run:
+          name: Push Docker image
+          command: |
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            docker push S1Y333/docker_testimage:${CIRCLE_SHA1}
       #run mvn
       - run: 
          name: mvn install
